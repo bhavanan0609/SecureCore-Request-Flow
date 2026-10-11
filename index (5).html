@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecureCore — Request Flow</title>
+<link rel="stylesheet" href="style.css">
+</head><body><div class="wrap">
+<div class="k">Data Structures · Micro-project · Module 2</div>
+<h1>SecureCore — <i>Request Flow</i></h1>
+<p class="sub">A pastel lavender demonstration of a linked list for researcher records and a linked queue for waiting access requests.</p>
+<div class="fix"><b>Limitations overcome:</b> no fixed size (a node is created only when needed, so there is no overflow), no wasted slots (a linked queue has no rear-space problem), no shifting (insert and delete only change pointers), and requests are served fairly in FIFO order.</div>
+<div class="bgpick">Background colour: <button class="sw" style="background:#f3eeff" data-c="#f3eeff"></button><button class="sw" style="background:#e6f4ff" data-c="#e6f4ff"></button><button class="sw" style="background:#e8f8ee" data-c="#e8f8ee"></button><button class="sw" style="background:#fff0f3" data-c="#fff0f3"></button><button class="sw" style="background:#fff8e1" data-c="#fff8e1"></button><input type="color" id="bgc" value="#f3eeff" style="width:40px;height:30px;padding:0;margin:0"></div>
+<div class="stats"><div class="stat"><b id="s1">0</b><span>RESEARCHERS</span></div><div class="stat"><b id="s2">0</b><span>AUTHORIZED</span></div><div class="stat"><b id="s3">0</b><span>QUEUED</span></div><div class="stat"><b id="s4">0</b><span>PROCESSED</span></div></div>
+<div class="tabs"><button class="on" data-t="t1">01 · Linked List Records</button><button data-t="t2">02 · Request Queue</button></div>
+
+<div class="card" id="t1"><h2>Researcher Records</h2><p class="sub">Add, display, search and delete researcher records stored in a singly linked list.</p>
+<div class="grid"><div><label>RESEARCHER ID</label><input id="id" placeholder="R104"></div><div><label>FULL NAME</label><input id="nm" placeholder="Full name"></div>
+<div><label>LABORATORY ZONE</label><select id="zn"><option>General Lab</option><option>Research Lab</option><option>Restricted Lab</option></select></div>
+<div><label>PERMISSION</label><select id="pm"><option>Authorized</option><option>Not authorized</option></select></div></div>
+<div class="row"><button class="a" onclick="addR()">+ Add Researcher</button><button class="a g" onclick="clr()">Clear</button></div>
+<div class="row"><div><label>SEARCH / DELETE BY ID</label><input id="q" placeholder="R101"></div><button class="a" onclick="findR()">Search List</button><button class="a g" onclick="delR()">Delete Node</button><button class="a g" onclick="resetR()">Reset Samples</button></div>
+<div class="msg" id="m1">Ready. Try searching for R101.</div>
+<h3>Linked List Visualizer</h3><p class="sub">Each node stores data and a pointer to the next node. HEAD is the first node; the last points to NULL.</p>
+<div class="chain" id="v1"></div>
+<div class="tw"><table><thead><tr><th>NODE</th><th>ID</th><th>NAME</th><th>ZONE</th><th>STATUS</th></tr></thead><tbody id="tb1"></tbody></table></div></div>
+
+<div class="card hide" id="t2"><h2>Access Request Queue</h2><p class="sub">Requests join at the rear and are served from the front (FIFO). The queue is a linked list with FRONT and REAR pointers.</p>
+<div class="row"><div><label>RESEARCHER ID</label><input id="rid" placeholder="R101"></div>
+<div><label>REQUESTED ZONE</label><select id="rz"><option>General Lab</option><option>Research Lab</option><option>Restricted Lab</option></select></div>
+<button class="a" onclick="enq()">+ Enqueue Request</button><button class="a g" onclick="deq()">Process Next (Dequeue)</button><button class="a g" onclick="resetQ()">Reset Samples</button></div>
+<div class="msg" id="m2">Ready. Process the next request to verify it against the records.</div>
+<h3>Queue Visualizer</h3><p class="sub">Enqueue adds a node at REAR. Dequeue removes the node at FRONT, checks the researcher in the linked list, and logs the decision.</p>
+<div class="chain" id="v2"></div>
+<h3>Decision Log</h3><div class="tw"><table><thead><tr><th>#</th><th>ID</th><th>ZONE</th><th>RESULT</th><th>REASON</th></tr></thead><tbody id="tb2"></tbody></table></div></div>
+
+<p class="foot">Educational simulation only. It does not connect to real fingerprint sensors, NFC readers, door locks or a permanent database. Data resets when the page is refreshed.</p>
+</div>
+<script src="script.js"></script>
+</body></html>
